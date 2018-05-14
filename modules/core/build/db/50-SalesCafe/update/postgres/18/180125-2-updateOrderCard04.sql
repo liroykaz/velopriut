@@ -1,1 +1,0 @@
-alter table SALESCAFE_ORDER_CARD add constraint FK_SALESCAFE_ORDER_CARD_PRODUCT foreign key (PRODUCT_ID) references SALESCAFE_PRODUCT(ID);
