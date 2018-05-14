@@ -1,0 +1,1 @@
+$wnd.com_haulmont_cuba_web_toolkit_ui_WidgetSet.runAsyncCallback2('dwb(2315,1,MIf);_.Cc=function gWd(){ytd((!rtd&&(rtd=new Dtd),rtd),this.a.d)};vpf(Sh)(2);\n//# sourceURL=com.haulmont.cuba.web.toolkit.ui.WidgetSet-2.js\n')

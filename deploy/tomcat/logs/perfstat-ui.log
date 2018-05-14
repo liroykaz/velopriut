@@ -1,0 +1,55 @@
+Performance Statistics   2018-05-14 17:06:00 - 2018-05-14 17:08:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+loginWindow#init                                        11,0          11          11         0,0           1
+loginWindow#inject                                      14,0          14          14         0,0           1
+loginWindow#load                                       273,0         273         273         0,0           1
+loginWindow#ready                                        0,0           0           0         0,0           1
+loginWindow#uiPermissions                                1,0           1           1         0,0           1
+loginWindow#xml                                          9,0           9           9         0,0           1
+mainWindow#init                                         16,0          16          16         0,0           1
+mainWindow#inject                                        7,0           7           7         0,0           1
+mainWindow#load                                        132,0         132         132         0,0           1
+mainWindow#ready                                         0,0           0           0         0,0           1
+mainWindow#uiPermissions                                 0,0           0           0         0,0           1
+mainWindow#xml                                           2,0           2           2         0,0           1
+salescafe$WorkDay.browse#init                            0,0           0           0         0,0           1
+salescafe$WorkDay.browse#inject                          1,0           1           1         0,0           1
+salescafe$WorkDay.browse#load                          220,0         220         220         0,0           1
+salescafe$WorkDay.browse#ready                           0,0           0           0         0,0           1
+salescafe$WorkDay.browse#uiPermissions                   0,0           0           0         0,0           1
+salescafe$WorkDay.browse#xml                             4,0           4           4         0,0           1
+salescafe$WorkDay.browse@workDaysDs                    264,0         264         264         0,0           1
+
+Performance Statistics   2018-05-14 17:08:00 - 2018-05-14 17:10:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:10:00 - 2018-05-14 17:12:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:12:00 - 2018-05-14 17:14:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:14:00 - 2018-05-14 17:16:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:16:00 - 2018-05-14 17:18:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:18:00 - 2018-05-14 17:20:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:20:00 - 2018-05-14 17:22:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:22:00 - 2018-05-14 17:24:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:24:00 - 2018-05-14 17:26:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:26:00 - 2018-05-14 17:28:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
+Performance Statistics   2018-05-14 17:42:00 - 2018-05-14 17:44:00
+Tag                                                  Avg(ms)         Min         Max     Std Dev       Count
+
