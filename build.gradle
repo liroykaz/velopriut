@@ -268,3 +268,12 @@ task stage(dependsOn: ['setupTomcat', ':app-core:deploy', ':app-web:deploy']) {
         webProperties.text = ''' cuba.webContextName = / '''
     }
 }
+
+task buildWar(type: CubaWarBuilding) {
+    coreContextXmlPath = 'modules/core/web/META-INF/war-context.xml'
+    webXmlPath = 'modules/web/web/WEB-INF/single-war-web.xml'
+    appProperties = ['cuba.automaticDatabaseUpdate' : true]
+    includeContextXml = true
+    includeJdbcDriver = true
+    appHome = '.'
+}
