@@ -1,0 +1,244 @@
+/*
+ * Copyright (c) 2008-2016 Haulmont.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
+$cuba-default-menubar-background: #1c1e20 !default;
+
+@function get-menu-background-color($color) {
+    @if ($color == #fafafa) {
+      @return $cuba-default-menubar-background;
+    } @else {
+      @return scale-color($color, $lightness: if(color-luminance($color) < 10, 15%, -70%));
+    }
+}
+
+@function get-menu-border-color($color) {
+    @if ($color == #fafafa) {
+      @return $cuba-default-menubar-background;
+    } @else {
+      @return first-color(valo-border($color: $v-selection-color));
+    }
+}
+
+$cuba-menubar-background-color: get-menu-background-color($v-app-background-color) !default;
+$cuba-menubar-border-color: get-menu-border-color($v-app-background-color) !default;
+
+$cuba-menubar-submenu-padding: 0px !default;
+$cuba-menubar-menuitem-text-color: #adaeb0 !default;
+$cuba-menubar-text-color: #adaeb0 !default;
+$cuba-menubar-menuitem-text-selected-color: #e8e8e8 !default;
+
+@mixin cuba-menubar {
+  .c-main-menu.v-menubar {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+
+    &:focus {
+      border: 0;
+    }
+
+    &:focus:after {
+      border: 0;
+      box-shadow: none;
+    }
+  }
+
+  .c-app-menubar .c-main-menu {
+    .v-menubar-menuitem-shortcut {
+      padding-left: round($v-unit-size/5);
+    }
+    .v-menubar-menuitem-empty-shortcut {
+      padding-left: 0;
+    }
+  }
+
+  $border-width: first-number($v-border);
+  $br: max(0, $v-border-radius - $border-width);
+  .c-main-menu.v-menubar > .v-menubar-menuitem {
+    border-right: 0;
+
+    @if $v-border-radius > 0 {
+      border-radius: $br;
+    }
+  }
+
+  .c-main-menu.v-menubar-submenu {
+    display: table;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: $cuba-menubar-submenu-padding;
+
+    .v-menubar-menuitem {
+      display: table-row;
+      position: relative;
+
+      &:active:before {
+        content: none;
+      }
+
+      &:active {
+        @include valo-button-active-style;
+      }
+    }
+
+    .v-menubar-menuitem-caption {
+      border-top-left-radius: $v-border-radius;
+      border-bottom-left-radius: $v-border-radius;
+      display: table-cell;
+      padding-left: round(2*$v-unit-size/3);
+
+      .v-ie11 & {
+        border-right: 1px solid transparent;
+      }
+    }
+
+    .v-menubar-menuitem-shortcut {
+      display: table-cell;
+      padding-left: round($v-unit-size/3);
+      padding-right: round(2*$v-unit-size/3);
+      border-top-right-radius: $v-border-radius;
+      border-bottom-right-radius: $v-border-radius;
+
+      .v-ie11 & {
+        border-left: 1px solid transparent;
+      }
+    }
+
+    .v-menubar-menuitem-selected {
+      .v-ie11 & {
+        background: $v-focus-color;
+
+        .v-menubar-menuitem-caption {
+          border-right: 1px solid $v-focus-color;
+        }
+
+        .v-menubar-submenu-indicator,
+        .v-menubar-menuitem-shortcut {
+          border-left: 1px solid $v-focus-color;
+        }
+      }
+    }
+
+    .v-menubar-separator {
+      font-size: 0;
+      display: table-row;
+
+      span {
+        box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        -ms-box-sizing: content-box;
+
+        display: table-cell;
+        height: 1px;
+        border-top: floor(round($v-unit-size/6)/2) solid transparent;
+        border-bottom: floor(round($v-unit-size/6)/2) solid transparent;
+        background-color: valo-border-color($color: $v-overlay-background-color, $strength: 0.5);
+        background-clip: padding-box;
+      }
+    }
+
+    .v-menubar-submenu-indicator {
+      display: table-cell;
+      text-align: right;
+      padding-left: round($v-unit-size/3);
+      padding-right: round(2*$v-unit-size/3);
+      border-top-right-radius: $v-border-radius;
+      border-bottom-right-radius: $v-border-radius;
+
+      .v-ie11 & {
+        border-left: 1px solid transparent;
+      }
+    }
+  }
+
+  .c-main-menu.v-menubar-submenu-has-icons .v-menubar-menuitem {
+    .v-icon {
+      margin-left: -$v-font-size--h1;
+      margin-right: 0;
+      width: $v-font-size--h1;
+    }
+
+    .v-menubar-menuitem-caption {
+      padding-left: $v-unit-size;
+    }
+  }
+
+  .c-ftsfield {
+    padding-right: $v-unit-size;
+    font-size: 0;
+    white-space: nowrap;
+
+    & > * {
+      font-size: $v-font-size;
+    }
+  }
+
+  .c-ftsfield-button {
+    width: $v-unit-size;
+    margin-right: -$v-unit-size;
+  }
+
+  @if ($v-support-inverse-menu) {
+    .c-inverse-header.c-app-menubar {
+      background: $cuba-menubar-background-color;
+      border: 1px solid $cuba-menubar-border-color;
+
+      @include box-shadow(none);
+
+      .c-main-menu {
+        .v-menubar-menuitem-more-item,
+        .v-menubar-menuitem-caption,
+        .v-menubar-menuitem-shortcut {
+          color: $cuba-menubar-menuitem-text-color;
+        }
+
+        .v-menubar-menuitem:hover .v-menubar-menuitem-caption,
+        .v-menubar-menuitem:hover .v-menubar-menuitem-shortcut,
+        .v-menubar-menuitem.v-menubar-menuitem-more-item:hover,
+        .v-menubar-menuitem-selected .v-menubar-menuitem-caption,
+        .v-menubar-menuitem-selected .v-menubar-menuitem-shortcut,
+        .v-menubar-menuitem-selected.v-menubar-menuitem-more-item {
+          color: $cuba-menubar-menuitem-text-selected-color;
+        }
+      }
+
+      .c-user-select-label {
+        color: $cuba-menubar-text-color;
+      }
+
+      .c-user-timezone-label {
+        color: $cuba-menubar-text-color;
+      }
+
+      .c-ftsfield-button,
+      .c-logout-button,
+      .c-newwindow-button {
+        color: $cuba-menubar-text-color;
+      }
+
+      .c-ftsfield-button:hover,
+      .c-ftsfield-button:focus,
+      .c-logout-button:hover,
+      .c-newwindow-button:hover,
+      .c-logout-button:focus,
+      .c-newwindow-button:focus {
+        color: $cuba-menubar-menuitem-text-selected-color;
+      }
+    }
+  }
+}

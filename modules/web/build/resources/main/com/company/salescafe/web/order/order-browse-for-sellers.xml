@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.salescafe.web.order.OrderBrowseForSellers"
+        focusComponent="ordersTable"
+        lookupComponent="ordersTable"
+        messagesPack="com.company.salescafe.web.order">
+    <dsContext>
+        <groupDatasource id="ordersDs"
+                         class="com.company.salescafe.entity.Order"
+                         view="order-view">
+            <query>
+                <![CDATA[select e from salescafe$Order e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <groupTable id="ordersTable"
+                    height="100%"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+                <action id="refresh"/>
+            </actions>
+            <columns>
+                <column id="numberOfOrder"/>
+                <column id="nameOfCustomer"/>
+                <column id="orderStatus"/>
+            </columns>
+            <rows datasource="ordersDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="ordersTable.create"/>
+                <button id="editBtn"
+                        action="ordersTable.edit"/>
+                <button id="removeBtn"
+                        action="ordersTable.remove"/>
+                <button id="refreshBtn"
+                        action="ordersTable.refresh"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

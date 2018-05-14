@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.salescafe.web.product.ProductMenuBrowse"
+        focusComponent="productsTable"
+        lookupComponent="productsTable"
+        messagesPack="com.company.salescafe.web.product">
+    <dsContext>
+        <groupDatasource id="productsDs"
+                         class="com.company.salescafe.entity.Product"
+                         view="product-view">
+            <query>
+                <![CDATA[select e from salescafe$Product e where e.isAvailable = 'true' order by e.productType]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <groupTable id="productsTable"
+                    height="100%"
+                    presentations="true"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="productName"
+                        width="340"/>
+                <column id="residue"
+                        width="100"/>
+                <column id="productPrice"
+                        width="100"/>
+                <column id="weight"
+                        width="100"/>
+                <column id="productType"/>
+            </columns>
+            <rows datasource="productsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="productsTable.create"/>
+                <button id="editBtn"
+                        action="productsTable.edit"/>
+                <button id="removeBtn"
+                        action="productsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.salescafe.web.ordercard.OrderCardBrowse"
+        focusComponent="orderCardsTable"
+        lookupComponent="orderCardsTable"
+        messagesPack="com.company.salescafe.web.ordercard">
+    <dsContext>
+        <groupDatasource id="orderCardsDs"
+                         class="com.company.salescafe.entity.OrderCard"
+                         view="orderCard-view">
+            <query>
+                <![CDATA[select e from salescafe$OrderCard e order by e.order.timeOfOrder]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderCardsTable"
+            spacing="true">
+        <groupBox spacing="true">
+            <hbox spacing="true">
+                <label id="dateAfterLabel"
+                       align="MIDDLE_LEFT"
+                       value="msg://dateAfter"/>
+                <dateField id="dateFirstField"
+                           dateFormat="dd.MM.yyyy"/>
+                <label id="dateBeforeLabel"
+                       align="MIDDLE_LEFT"
+                       value="msg://DateBefore"/>
+                <dateField id="dateSecondField"
+                           dateFormat="dd.MM.yyyy"/>
+                <button id="applyButton"
+                        caption="msg://Apply"
+                        invoke="onApplyButtonClick"/>
+            </hbox>
+        </groupBox>
+        <groupTable id="orderCardsTable"
+                    aggregatable="true"
+                    presentations="true"
+                    visible="false"
+                    width="100%">
+            <actions>
+                <action id="refresh"/>
+                <action id="excel"/>
+            </actions>
+            <columns>
+                <column id="product"/>
+                <column id="amount"
+                        width="100"/>
+                <column id="price"
+                        width="100">
+                    <aggregation type="SUM"/>
+                </column>
+                <column id="productType"/>
+                <column id="productStatus"
+                        width="170"/>
+                <column id="order.timeOfOrder"
+                        width="150"/>
+                <column id="order.typeOfCustomer"/>
+            </columns>
+            <rows datasource="orderCardsDs"/>
+            <rowsCount/>
+            <buttonsPanel>
+                <button id="refreshButton"
+                        action="orderCardsTable.refresh"/>
+                <button id="excelButton"
+                        action="orderCardsTable.excel"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

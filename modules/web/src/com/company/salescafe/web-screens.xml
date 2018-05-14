@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <include file="com/company/salescafe/screens.xml"/>
+    <screen id="salescafe$Order.browse"
+            template="com/company/salescafe/web/order/order-browse.xml"/>
+    <screen id="salescafe$Order.edit"
+            template="com/company/salescafe/web/order/order-edit.xml"/>
+    <screen id="salescafe$OrderCard.edit"
+            template="com/company/salescafe/web/ordercard/order-card-edit.xml"/>
+    <screen id="salescafe$Product.browse"
+            template="com/company/salescafe/web/product/product-browse.xml"/>
+    <screen id="salescafe$Product.edit"
+            template="com/company/salescafe/web/product/product-edit.xml"/>
+    <screen id="salescafe$Order.browseForSellers"
+            template="com/company/salescafe/web/order/order-browse-for-sellers.xml"/>
+    <screen id="salescafe$Product.menuBrowse"
+            template="com/company/salescafe/web/product/product-menu-browse.xml"/>
+    <screen id="salescafe$WorkDay.browse"
+            template="com/company/salescafe/web/workday/work-day-browse.xml"/>
+    <screen id="salescafe$WorkDay.edit"
+            template="com/company/salescafe/web/workday/work-day-edit.xml"/>
+    <screen id="salescafe$OrderCard.browse"
+            template="com/company/salescafe/web/ordercard/order-card-browse.xml"/>
+</screen-config>

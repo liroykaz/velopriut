@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.salescafe.web.workday.WorkDayBrowse"
+        focusComponent="workDaysTable"
+        lookupComponent="workDaysTable"
+        messagesPack="com.company.salescafe.web.workday">
+    <dsContext>
+        <groupDatasource id="workDaysDs"
+                         class="com.company.salescafe.entity.WorkDay"
+                         view="workDay-view">
+            <query>
+                <![CDATA[select e from salescafe$WorkDay e order by e.workDate desc]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <groupTable id="workDaysTable"
+                    height="100%"
+                    presentations="true"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="dayOfWeek"
+                        width="120"/>
+                <column id="workDate"
+                        width="100"/>
+                <column id="totalProfit"/>
+            </columns>
+            <rows datasource="workDaysDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="workDaysTable.create"/>
+                <button id="editBtn"
+                        action="workDaysTable.edit"/>
+                <button id="removeBtn"
+                        action="workDaysTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>
