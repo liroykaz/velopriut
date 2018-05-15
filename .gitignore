@@ -3,6 +3,7 @@
 *.iml
 *.iws
 modules/*/build/*
+deploy/*
 out
 test-run
 .idea
