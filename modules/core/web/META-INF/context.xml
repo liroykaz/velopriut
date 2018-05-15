@@ -9,15 +9,5 @@
               type="javax.sql.DataSource"
               url="jdbc:postgresql://localhost/salescafe1"
               username="postgres"/>
-    <!-- Switch off session serialization -->
     <Manager pathname=""/>
-    <!--<Resource driverClassName="org.hsqldb.jdbc.JDBCDriver"
-          maxIdle="2"
-          maxTotal="20"
-          maxWaitMillis="5000"
-          name="jdbc/CubaDS"
-          password=""
-          type="javax.sql.DataSource"
-          url="jdbc:hsqldb:hsql://localhost/salescafe"
-          username="sa"/>-->
 </Context>
