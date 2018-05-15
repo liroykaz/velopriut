@@ -5,10 +5,10 @@
               maxTotal="20"
               maxWaitMillis="5000"
               name="jdbc/CubaDS"
-              password="9b5dd950ae6d504039047445e1bae88056b850f3b50ce20c4581a41d44ddc4ad"
+              password="c6d3fc49ccb44a34689e09586e870cac281956c5063f208e1b2d41cf815a2ba6"
               type="javax.sql.DataSource"
-              url="jdbc:postgresql://usfjzcnxtjecya:9b5dd950ae6d504039047445e1bae88056b850f3b50ce20c4581a41d44ddc4ad@ec2-79-125-12-48.eu-west-1.compute.amazonaws.com:5432/d9bcovtje1hef6"
-              username="usfjzcnxtjecya"/>
+              url="jdbc:postgresql://gzhrpkvxlwgdys:c6d3fc49ccb44a34689e09586e870cac281956c5063f208e1b2d41cf815a2ba6@ec2-75-101-142-91.compute-1.amazonaws.com:5432/dfs0rrjih9d4nb"
+              username="gzhrpkvxlwgdys"/>
     <!-- Switch off session serialization -->
     <Manager pathname=""/>
     <!--<Resource driverClassName="org.hsqldb.jdbc.JDBCDriver"
