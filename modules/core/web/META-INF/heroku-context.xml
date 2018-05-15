@@ -7,7 +7,7 @@
               name="jdbc/CubaDS"
               password="9b5dd950ae6d504039047445e1bae88056b850f3b50ce20c4581a41d44ddc4ad"
               type="javax.sql.DataSource"
-              url="postgres://usfjzcnxtjecya:9b5dd950ae6d504039047445e1bae88056b850f3b50ce20c4581a41d44ddc4ad@ec2-79-125-12-48.eu-west-1.compute.amazonaws.com:5432/d9bcovtje1hef6"
+              url="jdbc:postgresql://usfjzcnxtjecya:9b5dd950ae6d504039047445e1bae88056b850f3b50ce20c4581a41d44ddc4ad@ec2-79-125-12-48.eu-west-1.compute.amazonaws.com:5432/d9bcovtje1hef6"
               username="usfjzcnxtjecya"/>
     <!-- Switch off session serialization -->
     <Manager pathname=""/>
