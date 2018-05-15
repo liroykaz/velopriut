@@ -108,11 +108,11 @@ configure(coreModule) {
     }
 
     task createDb(dependsOn: assembleDbScripts, description: 'Creates local database', type: CubaDbCreation) {
-        dbms = 'dfs0rrjih9d4nb'
-        host = 'ec2-75-101-142-91.compute-1.amazonaws.com'
-        dbName = 'dfs0rrjih9d4nb'
-        dbUser = 'gzhrpkvxlwgdys'
-        dbPassword = 'c6d3fc49ccb44a34689e09586e870cac281956c5063f208e1b2d41cf815a2ba6'
+        dbms = 'postgres'
+        host = 'localhost'
+        dbName = 'salescafe1sslmode=require'
+        dbUser = 'postgres'
+        dbPassword = 'root'
     }
 
 //    task updateDb(dependsOn: assembleDbScripts, description: 'Updates local database', type: CubaDbUpdate) {

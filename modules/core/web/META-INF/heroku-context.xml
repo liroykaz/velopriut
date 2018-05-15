@@ -6,7 +6,7 @@
               name="jdbc/CubaDS"
               password="c6d3fc49ccb44a34689e09586e870cac281956c5063f208e1b2d41cf815a2ba6"
               type="javax.sql.DataSource"
-              url="jdbc:postgresql://gzhrpkvxlwgdys:c6d3fc49ccb44a34689e09586e870cac281956c5063f208e1b2d41cf815a2ba6@ec2-75-101-142-91.compute-1.amazonaws.com:5432/dfs0rrjih9d4nb"
+              url="jdbc:postgresql://gzhrpkvxlwgdys:c6d3fc49ccb44a34689e09586e870cac281956c5063f208e1b2d41cf815a2ba6@ec2-75-101-142-91.compute-1.amazonaws.com:5432/dfs0rrjih9d4nb?sslmode=require"
               username="gzhrpkvxlwgdys"/>
     <Manager pathname=""/>
 </Context>
