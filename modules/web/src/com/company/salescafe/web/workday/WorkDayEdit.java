@@ -42,6 +42,14 @@ public class WorkDayEdit extends AbstractEditor<WorkDay> {
         param.put("workDay", getItem());
         orderCreateAction.setWindowParams(param);
 
+        orderCreateAction.setBeforeActionPerformedHandler(new Action.BeforeActionPerformedHandler() {
+            @Override
+            public boolean beforeActionPerformed() {
+                commit();
+                return true;
+            }
+        });
+
         ordersTable.setStyleProvider((entity, property) -> {
             if (StringUtils.isNotEmpty(property) && "orderStatus".equals(property)) {
                 if (OrderStatus.isCompleted.equals(((Order) entity).getOrderStatus()))
