@@ -62,12 +62,14 @@ public class OrderEdit extends AbstractEditor<Order> {
 
     protected void generateTotalCost(List<OrderCard> cardList) {
         int totalCost = 0;
-        cardList = getItem().getOrderCard();
+        if (getItem().getOrderCard() != null) {
+            cardList = getItem().getOrderCard();
 
-        for (OrderCard orderCard : cardList) {
-            totalCost += orderCard.getPrice();
+            for (OrderCard orderCard : cardList) {
+                totalCost += orderCard.getPrice();
+            }
+            getItem().setAllCost(totalCost);
         }
-        getItem().setAllCost(totalCost);
     }
 
     protected void initOrderProperties() {
