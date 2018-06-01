@@ -9,9 +9,11 @@ public enum ProductTypes implements EnumClass<Integer> {
 
     firstDish(10),
     secondDish(20),
+    drinks(60),
     desert(30),
     bakery(40),
-    service(50);
+    service(50),
+    salad(70);
 
     private Integer id;
 
