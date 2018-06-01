@@ -19,6 +19,7 @@
     <layout spacing="true">
         <groupTable id="productsTable"
                     aggregatable="true"
+                    editable="true"
                     height="100%"
                     presentations="true"
                     width="100%">
