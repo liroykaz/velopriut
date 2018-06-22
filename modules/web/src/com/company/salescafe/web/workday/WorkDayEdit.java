@@ -54,8 +54,6 @@ public class WorkDayEdit extends AbstractEditor<WorkDay> {
             if (StringUtils.isNotEmpty(property) && "orderStatus".equals(property)) {
                 if (OrderStatus.isCompleted.equals(((Order) entity).getOrderStatus()))
                     return "isComplete";
-                if (OrderStatus.inWork.equals(((Order) entity).getOrderStatus()))
-                    return "inWork";
                 if (OrderStatus.isaccepted.equals(((Order) entity).getOrderStatus()))
                     return "isAccepted";
             }
@@ -78,12 +76,14 @@ public class WorkDayEdit extends AbstractEditor<WorkDay> {
     public Component generateOrderCardProductListCell(Order entity) {
         StringBuilder str = new StringBuilder();
         for (OrderCard orderCard : entity.getOrderCard()) {
-            if (orderCard.getProduct() != null)
+            if (orderCard.getProduct() != null && orderCard.getProductStatus() != null && orderCard.getProductStatus().name() != null)
                 str.append("[").append(messages.getMessage(ProductStatus.class, "ProductStatus." + orderCard.getProductStatus().name())).append("] ")
                         .append(orderCard.getProduct().getProductName())
                         .append(" x")
                         .append(orderCard.getAmount())
                         .append("\n");
+            else
+                str.append("[...]").append("\n");
         }
         Label proudctInfoLabel = componentsFactory.createComponent(Label.class);
         proudctInfoLabel.setValue(str.toString());
@@ -102,7 +102,6 @@ public class WorkDayEdit extends AbstractEditor<WorkDay> {
                     int countNotCompletedCards = (int) entity.getOrderCard().stream().filter(o -> !ProductStatus.isComplete.equals(o.getProductStatus())).count();
                     if (countNotCompletedCards > 0) {
                         showNotification(getMessage("notCompletedCardsError"), NotificationType.HUMANIZED);
-                        orderService.setOrderStatus(entity, OrderStatus.inWork);
                     } else
                         orderService.setOrderStatus(entity, OrderStatus.isCompleted);
                     ordersDs.refresh();
@@ -112,20 +111,20 @@ public class WorkDayEdit extends AbstractEditor<WorkDay> {
         });
         passButton.setCaption("Выполнен");
         passButton.setStyleName("friendly");
-        passButton.setVisible(OrderStatus.inWork.equals(entity.getOrderStatus()));
+        passButton.setVisible(OrderStatus.isaccepted.equals(entity.getOrderStatus()));
 
-        final Button acceptButton = componentsFactory.createComponent(Button.class);
-        acceptButton.setAction(new AbstractAction("acceptOrder") {
-            @Override
-            public void actionPerform(Component component) {
-                orderService.setOrderStatus(entity, OrderStatus.inWork);
-                ordersDs.refresh();
-                ordersTable.repaint();
-            }
-        });
-        acceptButton.setCaption("Принять в работу");
-        acceptButton.setStyleName("primary");
-        acceptButton.setVisible(OrderStatus.isaccepted.equals(entity.getOrderStatus()));
+//        final Button acceptButton = componentsFactory.createComponent(Button.class);
+//        acceptButton.setAction(new AbstractAction("acceptOrder") {
+//            @Override
+//            public void actionPerform(Component component) {
+//                orderService.setOrderStatus(entity, OrderStatus.inWork);
+//                ordersDs.refresh();
+//                ordersTable.repaint();
+//            }
+//        });
+//        acceptButton.setCaption("Принять в работу");
+//        acceptButton.setStyleName("primary");
+//        acceptButton.setVisible(OrderStatus.isaccepted.equals(entity.getOrderStatus()));
 
         final Button reopenButton = componentsFactory.createComponent(Button.class);
         reopenButton.setAction(new AbstractAction("reopenOrder") {
@@ -141,7 +140,7 @@ public class WorkDayEdit extends AbstractEditor<WorkDay> {
         reopenButton.setVisible(OrderStatus.isCompleted.equals(entity.getOrderStatus()));
 
         hbox.add(passButton);
-        hbox.add(acceptButton);
+        //hbox.add(acceptButton);
         hbox.add(reopenButton);
         return hbox;
     }

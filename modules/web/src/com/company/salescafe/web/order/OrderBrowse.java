@@ -53,8 +53,6 @@ public class OrderBrowse extends AbstractLookup {
             if (StringUtils.isNotEmpty(property) && "orderStatus".equals(property)) {
                 if (OrderStatus.isCompleted.equals(((Order) entity).getOrderStatus()))
                     return "isComplete";
-                if (OrderStatus.inWork.equals(((Order) entity).getOrderStatus()))
-                    return "inWork";
                 if (OrderStatus.isaccepted.equals(((Order) entity).getOrderStatus()))
                     return "isAccepted";
             }
@@ -75,7 +73,7 @@ public class OrderBrowse extends AbstractLookup {
                     int countNotCompletedCards = (int) entity.getOrderCard().stream().filter(o -> !ProductStatus.isComplete.equals(o.getProductStatus())).count();
                     if (countNotCompletedCards > 0) {
                         showNotification(getMessage("notCompletedCardsError"), NotificationType.HUMANIZED);
-                        orderService.setOrderStatus(entity, OrderStatus.inWork);
+                        orderService.setOrderStatus(entity, OrderStatus.isCompleted);
                     } else
                         orderService.setOrderStatus(entity, OrderStatus.isCompleted);
                     ordersDs.refresh();
@@ -85,20 +83,7 @@ public class OrderBrowse extends AbstractLookup {
         });
         passButton.setCaption("Выполнен");
         passButton.setStyleName("friendly");
-        passButton.setVisible(OrderStatus.inWork.equals(entity.getOrderStatus()));
-
-        final Button acceptButton = componentsFactory.createComponent(Button.class);
-        acceptButton.setAction(new AbstractAction("acceptOrder") {
-            @Override
-            public void actionPerform(Component component) {
-                orderService.setOrderStatus(entity, OrderStatus.inWork);
-                ordersDs.refresh();
-                ordersTable.repaint();
-            }
-        });
-        acceptButton.setCaption("Принять в работу");
-        acceptButton.setStyleName("primary");
-        acceptButton.setVisible(OrderStatus.isaccepted.equals(entity.getOrderStatus()));
+        passButton.setVisible(OrderStatus.isaccepted.equals(entity.getOrderStatus()));
 
         final Button reopenButton = componentsFactory.createComponent(Button.class);
         reopenButton.setAction(new AbstractAction("reopenOrder") {
@@ -114,7 +99,6 @@ public class OrderBrowse extends AbstractLookup {
         reopenButton.setVisible(OrderStatus.isCompleted.equals(entity.getOrderStatus()));
 
         hbox.add(passButton);
-        hbox.add(acceptButton);
         hbox.add(reopenButton);
         return hbox;
     }

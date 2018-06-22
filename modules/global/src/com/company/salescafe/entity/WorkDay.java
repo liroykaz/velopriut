@@ -11,7 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import com.haulmont.chile.core.annotations.NamePattern;
 
-@NamePattern("%s|dayOfWeek")
+@NamePattern("%s %tD|dayOfWeek,workDate")
 @Table(name = "SALESCAFE_WORK_DAY")
 @Entity(name = "salescafe$WorkDay")
 public class WorkDay extends StandardEntity {

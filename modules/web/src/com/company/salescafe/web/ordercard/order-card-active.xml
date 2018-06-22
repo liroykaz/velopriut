@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.salescafe.web.ordercard.OrderCardActive"
+        focusComponent="orderCardsTable"
+        lookupComponent="orderCardsTable"
+        messagesPack="com.company.salescafe.web.ordercard">
+    <dsContext>
+        <groupDatasource id="orderCardsDs"
+                         class="com.company.salescafe.entity.OrderCard"
+                         view="orderCard-view">
+            <query>
+                <![CDATA[select e from salescafe$OrderCard e order by e.order.numberOfOrder desc]]>
+            </query>
+        </groupDatasource>
+        <collectionDatasource id="workDaysDs"
+                              class="com.company.salescafe.entity.WorkDay">
+            <query>
+                <![CDATA[select e from salescafe$WorkDay e order by e.createTs desc]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderCardsTable"
+            spacing="true">
+        <groupBox id="selectWorkDayGroupBox"
+                  caption="msg://WorkDayCaption"
+                  spacing="true">
+            <hbox spacing="true">
+                <lookupPickerField id="workDaylookupPickerField"
+                                   optionsDatasource="workDaysDs"/>
+                <button id="applyButton"
+                        caption="msg://Apply"
+                        icon="icons/bulk-edit.png"
+                        invoke="onApplyButtonClick"/>
+            </hbox>
+        </groupBox>
+        <groupTable id="orderCardsTable"
+                    presentations="true"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+                <action id="refresh"/>
+            </actions>
+            <columns>
+                <column id="order.numberOfOrder"
+                        generator="generateNumberOfOrderCell"
+                        width="110"/>
+                <column id="order.nameOfCustomer"
+                        width="120"/>
+                <column id="product"
+                        width="350"/>
+                <column id="amount"
+                        width="90"/>
+                <column id="productStatus"
+                        width="120"/>
+                <column id="actions"
+                        align="CENTER"
+                        caption="msg://actions"
+                        generator="generateActionsCell"
+                        width="170"/>
+                <column id="price"
+                        width="100"/>
+                <column id="order.comment"/>
+            </columns>
+            <rows datasource="orderCardsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="orderCardsTable.create"/>
+                <button id="editBtn"
+                        caption="msg://editCaption"
+                        icon="icons/edit.png"
+                        invoke="onEditBtnClick"/>
+                <button id="removeBtn"
+                        action="orderCardsTable.remove"/>
+                <button id="refreshButton"
+                        action="orderCardsTable.refresh"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

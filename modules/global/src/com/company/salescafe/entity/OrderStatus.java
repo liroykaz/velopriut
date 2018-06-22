@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 public enum OrderStatus implements EnumClass<Integer> {
 
     isaccepted(10),
-    inWork(20),
     isCompleted(30);
 
     private Integer id;

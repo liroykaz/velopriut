@@ -89,23 +89,12 @@ public class OrderEdit extends AbstractEditor<Order> {
             public void actionPerform(Component component) {
                 entity.setProductStatus(ProductStatus.isComplete);
                 orderCardTable.repaint();
+                passingOrderIfAllCardsCompleted();
             }
         });
         passButton.setCaption("Выполнен");
         passButton.setStyleName("friendly");
-        passButton.setVisible(ProductStatus.inWork.equals(entity.getProductStatus()));
-
-        final Button acceptButton = componentsFactory.createComponent(Button.class);
-        acceptButton.setAction(new AbstractAction("acceptOrder") {
-            @Override
-            public void actionPerform(Component component) {
-                entity.setProductStatus(ProductStatus.inWork);
-                orderCardTable.repaint();
-            }
-        });
-        acceptButton.setCaption("Принять в работу");
-        acceptButton.setStyleName("primary");
-        acceptButton.setVisible(ProductStatus.isAccepted.equals(entity.getProductStatus()));
+        passButton.setVisible(ProductStatus.isAccepted.equals(entity.getProductStatus()));
 
         final Button reopenButton = componentsFactory.createComponent(Button.class);
         reopenButton.setAction(new AbstractAction("reopenOrder") {
@@ -113,6 +102,7 @@ public class OrderEdit extends AbstractEditor<Order> {
             public void actionPerform(Component component) {
                 entity.setProductStatus(ProductStatus.isAccepted);
                 orderCardTable.repaint();
+                passingOrderIfAllCardsCompleted();
             }
         });
         reopenButton.setCaption("Выполнить заного");
@@ -120,7 +110,6 @@ public class OrderEdit extends AbstractEditor<Order> {
         reopenButton.setVisible(ProductStatus.isComplete.equals(entity.getProductStatus()));
 
         hbox.add(passButton);
-        hbox.add(acceptButton);
         hbox.add(reopenButton);
         return hbox;
     }
@@ -130,14 +119,21 @@ public class OrderEdit extends AbstractEditor<Order> {
             if (StringUtils.isNotEmpty(property) && "productStatus".equals(property)) {
                 if (ProductStatus.isComplete.equals(((OrderCard) entity).getProductStatus()))
                     return "isComplete";
-                if (ProductStatus.inWork.equals(((OrderCard) entity).getProductStatus()))
-                    return "inWork";
                 if (ProductStatus.isAccepted.equals(((OrderCard) entity).getProductStatus()))
                     return "isAccepted";
             }
 
             return null;
         });
+    }
+
+    protected void passingOrderIfAllCardsCompleted() {
+        int countOfUnCompletedCards = (int) orderCardDs.getItems().stream()
+                .filter(card -> ProductStatus.isAccepted.equals(card.getProductStatus()) || card.getProductStatus() == null).count();
+        if (countOfUnCompletedCards == 0)
+            getItem().setOrderStatus(OrderStatus.isCompleted);
+        else
+            getItem().setOrderStatus(OrderStatus.isaccepted);
     }
 
     protected void showNotificationIfCloseOrderNotCompleted() {

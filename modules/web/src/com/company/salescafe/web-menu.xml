@@ -4,6 +4,7 @@
           insertBefore="administration">
         <item screen="salescafe$WorkDay.browse"/>
         <item screen="salescafe$Product.browse"/>
+        <item screen="salescafe$OrderCard.active"/>
     </menu>
     <item insertBefore="administration"
           screen="salescafe$Product.menuBrowse"/>

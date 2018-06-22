@@ -21,4 +21,6 @@
             template="com/company/salescafe/web/workday/work-day-edit.xml"/>
     <screen id="salescafe$OrderCard.browse"
             template="com/company/salescafe/web/ordercard/order-card-browse.xml"/>
+    <screen id="salescafe$OrderCard.active"
+            template="com/company/salescafe/web/ordercard/order-card-active.xml"/>
 </screen-config>
