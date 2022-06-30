@@ -7,7 +7,7 @@ import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
 import com.haulmont.cuba.gui.data.Datasource;
 import com.haulmont.cuba.gui.xml.layout.ComponentsFactory;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -138,13 +138,15 @@ public class OrderEdit extends AbstractEditor<Order> {
 
     protected void showNotificationIfCloseOrderNotCompleted() {
         orderStatus.addValueChangeListener(e -> {
-            if (OrderStatus.isCompleted.equals(e.getValue())) {
+            if (OrderStatus.isCompleted.equals(orderStatus.getValue())) {
                 int countNotCompletedCards = (int) getItem().getOrderCard().stream().filter(o -> !ProductStatus.isComplete.equals(o.getProductStatus())).count();
                 if (countNotCompletedCards > 0) {
                     showNotification(getMessage("notCompletedCardsError"), NotificationType.HUMANIZED);
-                    getItem().setOrderStatus((OrderStatus) e.getPrevValue());
+                    getItem().setOrderStatus(OrderStatus.isaccepted);
                 }
             }
         });
     }
+
+
 }

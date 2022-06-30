@@ -82,18 +82,18 @@ public class OrderCardEdit extends AbstractEditor<OrderCard> {
     protected void initCalculatePrice() {
         productType.addValueChangeListener(e -> {
             product.setValue(null);
-            filterProductListOnType((ProductTypes) e.getValue());
+            filterProductListOnType((ProductTypes) productType.getValue());
         });
 
         product.addValueChangeListener(e -> {
-            if (e.getValue() != null)
+            if (product.getValue() != null)
                 price.setValue(getItem().getProduct().getProductPrice() * getItem().getAmount());
             else
                 price.setValue(null);
         });
 
         amount.addValueChangeListener(e -> {
-            if (e.getValue() != null && getItem().getProduct() != null)
+            if (amount.getValue() != null && getItem().getProduct() != null)
                 price.setValue(getItem().getProduct().getProductPrice() * getItem().getAmount());
         });
     }

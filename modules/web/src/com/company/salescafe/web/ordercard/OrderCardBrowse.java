@@ -9,6 +9,7 @@ import com.haulmont.cuba.gui.components.GroupTable;
 import com.haulmont.cuba.gui.data.GroupDatasource;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -37,7 +38,7 @@ public class OrderCardBrowse extends AbstractLookup {
             List<OrderCard> orderCards = orderCardsDs.getItems().stream().collect(Collectors.toList());
             orderCards.forEach(e -> orderCardsDs.excludeItem(e));
             orderCardsTable.setVisible(true);
-            orderService.getFilteredBetweenDateList(dateFirstField.getValue(), dateSecondField.getValue())
+            orderService.getFilteredBetweenDateList((Date) dateFirstField.getValue(), (Date) dateSecondField.getValue())
                     .forEach(e -> orderCardsDs.addItem(e));
         } else
             showNotification(getMessage("errorFilteringApply"), NotificationType.HUMANIZED);

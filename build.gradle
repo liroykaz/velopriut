@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '6.10-SNAPSHOT'
+    ext.cubaVersion = '7.0.5'
     repositories {
         
         maven {
@@ -28,7 +28,6 @@ def webThemesModule = project(":${modulePrefix}-web-themes" )
 def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 
 
-apply(plugin: 'idea')
 apply(plugin: 'cuba')
 
 cuba {
@@ -48,12 +47,11 @@ dependencies {
 
 }
 
-def postgres = 'org.postgresql:postgresql:9.4.1212'
+def postgres = 'org.postgresql:postgresql:42.2.9'
 
 configure([globalModule, coreModule, guiModule, webModule]) {
     apply(plugin: 'java')
     apply(plugin: 'maven')
-    apply(plugin: 'idea')
     apply(plugin: 'cuba')
 
     dependencies {
@@ -71,6 +69,12 @@ configure([globalModule, coreModule, guiModule, webModule]) {
 }
 
 configure(globalModule) {
+    dependencies {
+        if (!JavaVersion.current().isJava8()) {
+            runtime('javax.xml.bind:jaxb-api:2.3.1')
+            runtime('org.glassfish.jaxb:jaxb-runtime:2.3.1')
+        }
+    }
     entitiesEnhancing {
         main { enabled = true }
     }
@@ -87,7 +91,7 @@ configure(coreModule) {
 
     dependencies {
         compile(globalModule)
-        provided(servletApi)
+        compileOnly(servletApi)
         jdbc(postgres)
         testRuntime(postgres)
 
@@ -145,7 +149,7 @@ configure(webModule) {
     }
 
     dependencies {
-        provided(servletApi)
+        compileOnly(servletApi)
         compile(guiModule)
 
     }
@@ -233,9 +237,6 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy" , ":${modulePref
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.3.1'
-}
 
 task stage(dependsOn: ['setupTomcat', ":${modulePrefix}-core:deploy" , ":${modulePrefix}-web:deploy" ]) {
     doLast {
